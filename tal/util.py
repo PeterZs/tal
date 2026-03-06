@@ -56,4 +56,7 @@ def tonemap_ldr(image):
 
 def write_img(path, img):
     import imageio
-    imageio.imwrite(path, img)
+    if img.ndim == 3 and img.shape[2] == 1:
+        imageio.imwrite(path, img[..., 0])
+    else:
+        imageio.imwrite(path, img)
